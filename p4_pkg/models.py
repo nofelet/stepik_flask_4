@@ -1,0 +1,29 @@
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+
+class Group(db.Model):
+    __tablename__ = 'groups'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, unique=True, nullable=False)
+    status = db.Column(db.String, nullable=False)
+    start = db.Column(db.Date, nullable=False)
+    applications = db.relationship()
+
+class Applicant(db.Model):
+    __tablename__ = 'applicants'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    phone = db.Column(db.String, nullable=False)
+    mail = db.Column(db.String, nullable=False)
+    status = db.Column(db.String,  nullable=False)
+    group = db.relationship()
+
