@@ -15,8 +15,9 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, unique=True, nullable=False)
     status = db.Column(db.String, nullable=False)
+    course = db.Column(db.String, nullable=False)
     start = db.Column(db.Date, nullable=False)
-    applications = db.relationship()
+    applications = db.relationship('Applicant', back_populates='group')
 
 class Applicant(db.Model):
     __tablename__ = 'applicants'
@@ -25,5 +26,6 @@ class Applicant(db.Model):
     phone = db.Column(db.String, nullable=False)
     mail = db.Column(db.String, nullable=False)
     status = db.Column(db.String,  nullable=False)
-    group = db.relationship()
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
+    group = db.relationship('Group', back_populates='applications')
 
