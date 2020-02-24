@@ -7,8 +7,10 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False)
+    mail = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+    address = db.Column(db.String, nullable=False)
+    orders = db.relationship('_', back_populates='_')
 
 class Group(db.Model):
     __tablename__ = 'groups'
