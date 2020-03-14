@@ -4,5 +4,9 @@ from p4_pkg.models import db, User, Meal, Category, Order, meals_orders_associat
 
 @app.route('/')
 def main():
-    output = render_template('index.html')
+    number = 6
+    cost = 488
+    output = render_template('index.html',
+                             number=number,
+                             cost=cost)
     return output
