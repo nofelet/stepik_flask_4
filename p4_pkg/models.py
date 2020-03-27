@@ -41,3 +41,17 @@ class Order(db.Model):
     status = db.Column(db.String, nullable=False)
     meals = db.relationship('Meal', secondary=meals_orders_association, back_populates='orders')
     users = db.relationship('User', back_populates='orders')
+
+db.create_all()
+
+#Populate meals and categories from json files
+with open('categories.json') as cat_file:
+    cat_data = json.load(cat_file)
+
+with open('meals.json') as meals_file:
+    meals_data = json.load(meals_file)
+
+for i in range(length(cat_data['id'])):
+    category = Category(id=cat_data['id'][str(i)],
+                        title=cat_data['title'][str(i)])
+    db.session.add(category)
